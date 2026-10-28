@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechEngage | Engineering Online Quiz & Exam Platform</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <meta name="description" content="Master engineering concepts with interactive quizzes, math formulas, circuit diagrams, and step-by-step solutions across CSE, EEE, ME, CE, ECE, and Engineering Mathematics.">
+
+  <!-- Google Fonts: Outfit (headings) + Inter (body) + Fira Code (code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- KaTeX (Math Formula Rendering) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NAVIGATION BAR
+════════════════════════════════════════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main Navigation">
+  <div class="nav-brand">
+    <div class="brand-icon" aria-hidden="true">⚡</div>
+    <div class="brand-title">TechEngage</div>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" id="nav-home-btn" title="Dashboard">🏠 Home</button>
+    <button class="nav-btn" id="nav-analytics-btn" title="Analytics">📊 Analytics</button>
+    <button class="nav-btn" id="nav-bookmarks-btn" title="Bookmarks">📌 Saved</button>
+    <button class="nav-btn" id="nav-theme-toggle" title="Toggle Theme">🌙 Theme</button>
+    <button class="nav-btn" id="nav-mute-toggle" title="Toggle Sound">🔊 Sound</button>
+    <div class="user-badge">
+      <span aria-hidden="true">🎓</span>
+      <span id="user-badge-text">Engineer · Lvl 1</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTAINER
+════════════════════════════════════════════════════════════ -->
+<main class="app-container">
+
+  <!-- ─────────────────────────────────────────────────────────
+       SCREEN 1 · DASHBOARD
+  ──────────────────────────────────────────────────────────── -->
+  <section id="screen-dashboard" class="screen active" aria-label="Dashboard">
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-content">
+        <h1>Ace Your <span class="hero-highlight">Engineering Exams</span> with Confidence</h1>
+        <p class="hero-subtitle">
+          Formulas · Circuit Diagrams · Code Challenges · Step-by-step Solutions
+          across all major engineering disciplines. GATE-level practice included.
+        </p>
+        <div class="hero-cta">
+          <button class="btn-primary"   id="hero-btn-practice">🚀 Practice Mode</button>
+          <button class="btn-secondary" id="hero-btn-exam">⏱️ Exam Simulation</button>
+          <button class="btn-secondary" id="hero-btn-rapid" style="border-color:var(--accent-amber);color:var(--accent-amber);">⚡ Rapid Fire (60s)</button>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div style="font-size:7rem;line-height:1;filter:drop-shadow(0 0 30px rgba(0,242,254,0.5));">⚡</div>
+        <div style="margin-top:0.5rem;text-align:center;font-size:0.85rem;color:var(--text-muted);">KaTeX · Circuits · Code · Analytics</div>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(0,242,254,0.12);color:var(--accent-cyan);">📝</div>
+        <div>
+          <div class="stat-val" id="stat-total-quizzes">0</div>
+          <div class="stat-label">Quizzes Completed</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(16,185,129,0.12);color:var(--accent-emerald);">🎯</div>
+        <div>
+          <div class="stat-val" id="stat-overall-accuracy">0%</div>
+          <div class="stat-label">Accuracy Rate</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(245,158,11,0.12);color:var(--accent-amber);">⚡</div>
+        <div>
+          <div class="stat-val" id="stat-user-xp">0 XP</div>
+          <div class="stat-label">Engineering XP</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(139,92,246,0.12);color:var(--accent-purple);">📌</div>
+        <div>
+          <div class="stat-val" id="stat-saved-bookmarks">0</div>
+          <div class="stat-label">Saved Questions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch Cards -->
+    <div class="section-header">
+      <h2 class="section-title">🏛️ Choose Your Engineering Discipline</h2>
+    </div>
+    <div id="branches-grid" class="branches-grid">
+      <!-- Injected by JS -->
+    </div>
+
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       SCREEN 2 · QUIZ ARENA
+  ──────────────────────────────────────────────────────────── -->
+  <section id="screen-quiz-arena" class="screen" aria-label="Quiz Arena">
+
+    <!-- Progress Bar -->
+    <div style="height:4px;background:var(--border-color);border-radius:2px;margin-bottom:1rem;overflow:hidden;">
+      <div id="quiz-progress-bar" style="height:100%;background:linear-gradient(90deg,var(--accent-cyan),var(--primary-color));width:10%;transition:width 0.4s ease;border-radius:2px;"></div>
+    </div>
+
+    <!-- Arena Header -->
+    <div class="quiz-header-bar">
+      <div class="quiz-meta">
+        <span id="q-counter" style="font-weight:700;font-size:1rem;">Question 1 of 10</span>
+        <span id="q-topic-badge" class="q-topic-badge">Topic</span>
+        <span id="q-difficulty" class="branch-badge" style="font-size:0.75rem;"></span>
+      </div>
+      <div class="quiz-meta" style="gap:0.75rem;">
+        <div class="quiz-timer" aria-live="polite">
+          <span aria-hidden="true">⏱️</span>
+          <span id="quiz-timer-display">10:00</span>
+        </div>
+        <button id="btn-submit-quiz" class="btn-primary" style="padding:0.5rem 1.2rem;font-size:0.9rem;">Submit Quiz ✓</button>
+      </div>
+    </div>
+
+    <!-- Arena Body: Question + Sidebar -->
+    <div class="quiz-layout">
+
+      <!-- Left: Question Card -->
+      <div class="question-card">
+        <div class="question-top">
+          <span style="font-size:0.8rem;color:var(--text-dim);">Select the best answer</span>
+          <div class="q-action-btns">
+            <button id="btn-show-hint"   class="icon-btn" title="Show Hint">💡</button>
+            <button id="btn-flag-q"      class="icon-btn" title="Flag for Review">🚩</button>
+            <button id="btn-bookmark-q"  class="icon-btn" title="Bookmark">📌</button>
+          </div>
+        </div>
+
+        <!-- Hint Box (collapsed by default) -->
+        <div id="hint-box" class="solution-box" style="background:rgba(245,158,11,0.08);border-color:var(--accent-amber);">
+          <div class="solution-title" style="color:var(--accent-amber);">💡 Hint</div>
+          <div id="hint-content" style="font-size:0.9rem;color:var(--text-muted);"></div>
+        </div>
+
+        <!-- Question Text -->
+        <div id="question-text" class="question-text">Loading question…</div>
+
+        <!-- Code Block (conditional) -->
+        <pre id="question-code-block" class="code-block" style="display:none;" aria-label="Code snippet"></pre>
+
+        <!-- SVG Schematic (conditional) -->
+        <div id="question-svg-container" class="svg-container" style="display:none;" aria-label="Engineering diagram"></div>
+
+        <!-- Options -->
+        <div id="options-list" class="options-list" role="radiogroup" aria-label="Answer options">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Solution/Explanation (practice mode, post-answer) -->
+        <div id="solution-box" class="solution-box">
+          <div class="solution-title">✅ Detailed Solution &amp; Formula Breakdown</div>
+          <div id="solution-content" style="font-size:0.95rem;line-height:1.7;"></div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;">
+          <button id="btn-prev-q" class="btn-secondary">← Previous</button>
+          <button id="btn-next-q" class="btn-primary">Next Question →</button>
+        </div>
+      </div>
+
+      <!-- Right: Question Navigator Palette -->
+      <div class="palette-card">
+        <div class="palette-title">Question Navigator</div>
+        <div id="palette-grid" class="palette-grid" role="navigation" aria-label="Question grid">
+          <!-- Nodes injected by JS -->
+        </div>
+        <div class="palette-legend">
+          <div class="legend-item"><div class="dot" style="background:var(--primary-color);"></div>Answered</div>
+          <div class="legend-item"><div class="dot" style="background:var(--accent-cyan);border:2px solid var(--accent-cyan);"></div>Current</div>
+          <div class="legend-item"><div class="dot" style="background:var(--accent-amber);"></div>Flagged</div>
+          <div class="legend-item"><div class="dot" style="background:rgba(255,255,255,0.08);border:1px solid var(--border-color);"></div>Unvisited</div>
+        </div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border-color);font-size:0.8rem;color:var(--text-muted);">
+          <div>💡 Practice: Instant feedback after each answer.</div>
+          <div style="margin-top:0.4rem;">⏱️ Exam: Feedback revealed only after submitting.</div>
+        </div>
+      </div>
+
+    </div><!-- .quiz-layout -->
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       SCREEN 3 · RESULTS
+  ──────────────────────────────────────────────────────────── -->
+  <section id="screen-quiz-results" class="screen" aria-label="Quiz Results">
+
+    <!-- Score Card -->
+    <div class="results-card">
+      <h2 style="font-size:2rem;margin-bottom:0.5rem;">Quiz Results</h2>
+      <p style="color:var(--text-muted);margin-bottom:2rem;">Here's your engineering performance breakdown.</p>
+
+      <!-- Animated SVG Ring -->
+      <div style="position:relative;width:160px;height:160px;margin:0 auto 1.5rem auto;">
+        <svg viewBox="0 0 120 120" style="width:160px;height:160px;transform:rotate(-90deg);">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="10"/>
+          <circle id="score-ring-fill" cx="60" cy="60" r="54" fill="none"
+            stroke="var(--accent-cyan)" stroke-width="10"
+            stroke-linecap="round"
+            style="stroke-dasharray:339.3;stroke-dashoffset:339.3;transition:stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);"/>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <div id="result-score-num" class="score-num">0</div>
+          <div id="result-score-max" class="score-max">/ 10</div>
+        </div>
+      </div>
+
+      <!-- Grade Badge -->
+      <div style="margin-bottom:1.5rem;">
+        <span id="result-grade-val" style="font-size:2rem;font-weight:800;color:var(--accent-amber);">—</span>
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:0.25rem;">Grade</div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="results-summary-grid">
+        <div class="r-stat-box">
+          <div class="stat-label">Accuracy</div>
+          <div id="result-accuracy-val" class="r-stat-val">0%</div>
+        </div>
+        <div class="r-stat-box">
+          <div class="stat-label">Time</div>
+          <div id="result-time-val"     class="r-stat-val" style="color:var(--accent-amber);">0m 0s</div>
+        </div>
+        <div class="r-stat-box">
+          <div class="stat-label">Correct</div>
+          <div id="result-correct-val"  class="r-stat-val" style="color:var(--accent-emerald);">0</div>
+        </div>
+        <div class="r-stat-box">
+          <div class="stat-label">Incorrect</div>
+          <div id="result-wrong-val"    class="r-stat-val" style="color:var(--accent-rose);">0</div>
+        </div>
+        <div class="r-stat-box">
+          <div class="stat-label">Mode</div>
+          <div id="result-mode-val"     class="r-stat-val" style="font-size:1.1rem;">—</div>
+        </div>
+      </div>
+
+      <!-- Branch Breakdown Pills -->
+      <div id="branch-breakdown-pills" class="results-summary-grid" style="margin-top:0;"></div>
+
+      <!-- Action Buttons -->
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+        <button id="btn-retry-quiz"          class="btn-primary">🔄 Retry Quiz</button>
+        <button id="btn-new-quiz"            class="btn-secondary">🏠 New Quiz</button>
+        <button id="btn-claim-certificate"   class="btn-secondary"
+          style="border-color:var(--accent-amber);color:var(--accent-amber);display:none;">
+          🎓 Claim Certificate
+        </button>
+      </div>
+    </div>
+
+    <!-- Wrong Answers Review -->
+    <div class="question-card" style="max-width:800px;margin:0 auto;">
+      <h3 style="margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem;">
+        🔍 Review Incorrect Answers
+      </h3>
+      <div id="review-list"><!-- Injected by JS --></div>
+    </div>
+
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       SCREEN 4 · ANALYTICS
+  ──────────────────────────────────────────────────────────── -->
+  <section id="screen-analytics" class="screen" aria-label="Analytics">
+    <div class="section-header">
+      <h2 class="section-title">📊 Performance Analytics</h2>
+      <button id="btn-clear-history" class="btn-secondary" style="font-size:0.85rem;padding:0.5rem 1rem;">🗑 Clear History</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(0,242,254,0.12);color:var(--accent-cyan);">📝</div>
+        <div><div id="an-total-quizzes" class="stat-val">0</div><div class="stat-label">Total Quizzes</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(16,185,129,0.12);color:var(--accent-emerald);">🎯</div>
+        <div><div id="an-accuracy" class="stat-val" style="color:var(--accent-emerald);">0%</div><div class="stat-label">Average Accuracy</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(59,130,246,0.12);color:var(--primary-color);">🧪</div>
+        <div><div id="an-questions" class="stat-val">0</div><div class="stat-label">Questions Attempted</div></div>
+      </div>
+    </div>
+
+    <div class="question-card" style="margin-top:2rem;">
+      <h3 style="margin-bottom:1.5rem;">Quiz History</h3>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;text-align:left;font-size:0.9rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border-color);color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;">
+              <th style="padding:0.75rem;">Date</th>
+              <th style="padding:0.75rem;">Discipline</th>
+              <th style="padding:0.75rem;">Mode</th>
+              <th style="padding:0.75rem;">Score</th>
+              <th style="padding:0.75rem;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body"><!-- Rows injected by JS --></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       SCREEN 5 · BOOKMARKS
+  ──────────────────────────────────────────────────────────── -->
+  <section id="screen-bookmarks" class="screen" aria-label="Saved Questions">
+    <div class="section-header">
+      <h2 class="section-title">📌 Bookmarked Questions</h2>
+    </div>
+    <div id="bookmarks-list"><!-- Injected by JS --></div>
+  </section>
+
+</main><!-- .app-container -->
+
+<!-- ═══════════════════════════════════════════════════════════
+     CERTIFICATE MODAL
+════════════════════════════════════════════════════════════ -->
+<div id="certificate-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Certificate of Completion">
+  <div class="modal-container">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;" class="no-print">
+      <button id="btn-print-cert"       class="btn-primary"   style="padding:0.5rem 1.1rem;margin-right:0.5rem;">🖨️ Print / Save PDF</button>
+      <button id="btn-close-cert-modal" class="btn-secondary" style="padding:0.5rem 1.1rem;">✕ Close</button>
+    </div>
+
+    <div class="certificate-frame">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem;" aria-hidden="true">🏆</div>
+      <div class="cert-header">Certificate of Engineering Proficiency</div>
+      <div class="cert-sub">Academic Excellence Award</div>
+
+      <div style="margin:1.25rem 0;font-size:1rem;color:#475569;font-style:italic;">This certifies that</div>
+      <div id="cert-student-name" class="cert-name">Engineering Student</div>
+
+      <div class="cert-body">
+        has successfully demonstrated outstanding proficiency in
+        <strong id="cert-branch-label">Engineering</strong> with
+        <span id="cert-score-label" style="color:#2563EB;font-weight:700;"></span>,
+        reflecting a deep understanding of core engineering principles and problem-solving skills.
+      </div>
+
+      <div class="cert-footer">
+        <div class="cert-seal">OFFICIAL<br>VERIFIED<br>✓</div>
+        <div class="cert-sig-box">
+          <div style="font-size:1.5rem;margin-bottom:0.5rem;">TechEngage</div>
+          <div class="cert-sig-line"></div>
+          <div style="font-size:0.85rem;font-weight:700;color:#0F172A;">TechEngage Academic Board</div>
+          <div id="cert-issue-date" style="font-size:0.75rem;color:#64748B;margin-top:0.25rem;">Issued: —</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS (order matters: data → audio → storage → app)
+════════════════════════════════════════════════════════════ -->
+<script src="js/data/questions.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
